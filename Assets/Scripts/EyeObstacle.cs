@@ -13,7 +13,8 @@ public class EyeObstacle : MonoBehaviour
 
     int activeColorIndex;
     float startingIntesity;
-    bool soundPlaying;
+    bool addsToVolume;
+    bool isPlaying;
     Coroutine? currentCoroutine;
 
     private void Awake()
@@ -32,26 +33,30 @@ public class EyeObstacle : MonoBehaviour
             StopAllCoroutines();
             enabled = false;
         }
-        if (GameManager.Instance.InEyeObstacle && activeColorIndex != 1 && !GameManager.Instance.IsGameOver)
+        if (GameManager.Instance.InEyeObstacle && !GameManager.Instance.IsGameOver)
         {
             var targetDir = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
             targetDir.Normalize();
             if (targetDir.y != 0 || targetDir.x != 0)
             {
-                Light.intensity *= 1.05f;
-                if (!soundPlaying)
+                if (activeColorIndex != 1)
                 {
-                    currentCoroutine ??= StartCoroutine(VolumeIncrease());
-
-                    soundPlaying = true;
-                    Audio.Play();
+                    Light.intensity *= 1.05f;
+                    if (!isPlaying)
+                    {
+                        currentCoroutine ??= StartCoroutine(VolumeIncrease());
+                        addsToVolume = true;
+                        isPlaying = true;
+                        Audio.Play();
+                    }
                 }
             }
             else
             {
-                if (soundPlaying)
+                if (isPlaying)
                 {
-                    soundPlaying = false;
+                    addsToVolume = false;
+                    isPlaying = false;
                     Audio.Pause();
                 }
             }
@@ -66,17 +71,6 @@ public class EyeObstacle : MonoBehaviour
             Light.intensity = startingIntesity;
             Light.color = SelectedColors[activeColorIndex++];
 
-            if (activeColorIndex == 1)
-            {
-                Audio.volume = 0;
-                soundPlaying = false;
-                Audio.Stop();
-                if (currentCoroutine != null)
-                {
-                    StopCoroutine(currentCoroutine);
-                    currentCoroutine = null;
-                }
-            }
             if (activeColorIndex >= SelectedColors.Count) activeColorIndex = 0;
         }
     }
@@ -85,9 +79,9 @@ public class EyeObstacle : MonoBehaviour
     {
         while (Audio.volume < 1)
         {
-            if (soundPlaying)
+            if (addsToVolume && activeColorIndex != 1)
             {
-                Audio.volume += 0.025f;
+                Audio.volume += 0.05f;
             }
             yield return new WaitForSeconds(0.1f);
         }
@@ -115,6 +109,9 @@ public class EyeObstacle : MonoBehaviour
                 StopCoroutine(currentCoroutine);
                 currentCoroutine = null;
                 Audio.Stop();
+                Audio.volume = 0;
+                addsToVolume = false;
+                isPlaying = false;
             }
         }
     }

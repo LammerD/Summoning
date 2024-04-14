@@ -4,19 +4,21 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     [SerializeField] int LastButtonValue;
     [SerializeField] int AmountOfRequiredSymbols;
+    [SerializeField] MeshRenderer EndlessTunnelRenderer;
+    [SerializeField] Animator CircleAnimator;
+    [SerializeField] Image FadeImage;
+    [SerializeField] GameObject WinText;
     public UnityEvent WrongButtonDoorOrder;
     public UnityEvent ButtonDoorOpen;
     public UnityEvent GameOver;
     public UnityEvent WindShieldGet;
     public UnityEvent AllSymbolsRight;
-
-    public UnityEvent StartCorridor;
-    public UnityEvent EndCorridor;
 
     public static GameManager Instance { get; private set; }
     public float GameOverTime;
@@ -96,7 +98,27 @@ public class GameManager : MonoBehaviour
         if (rightSymbolsDrawn == AmountOfRequiredSymbols && wrongSymbolsDrawn == 0)
         {
             AllSymbolsRight.Invoke();
+            CircleAnimator.SetTrigger("Win");
         }
+    }
+
+    public void WinGame()
+    {
+        DisabledPlayerMovement = true;
+        IsGameOver = true;
+        StartCoroutine(FadeOut());
+    }
+
+    IEnumerator FadeOut()
+    {
+        while (FadeImage.color.a < 1)
+        {
+            var tempColor = FadeImage.color;
+            tempColor.a += 0.01f;
+            FadeImage.color = tempColor;
+            yield return new WaitForSeconds(0.01f);
+        }
+        WinText.SetActive(true);
     }
 
     IEnumerator DelayBeforeGameOver()
@@ -126,6 +148,7 @@ public class GameManager : MonoBehaviour
         DisabledPlayerMovement = false;
         InEndlessCorridor = false;
         BeatEndlessCorridor = true;
+        EndlessTunnelRenderer.enabled = true;
     }
 
     public void LookAtTarget(bool isLooking)

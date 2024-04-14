@@ -22,9 +22,9 @@ AnimationClip:
     curve:
     - time: 0
       value: {fileID: 2100000, guid: 8f8c7600f9b90cc4680c61365dd9e9c8, type: 2}
-    - time: 1
+    - time: 0.8
       value: {fileID: 2100000, guid: d74aebb785d52da4baef71239f57507c, type: 2}
-    - time: 1.3333334
+    - time: 1.0833334
       value: {fileID: 2100000, guid: 8f8c7600f9b90cc4680c61365dd9e9c8, type: 2}
     attribute: m_Materials.Array.data[0]
     path: InteractableCube (5)/Cube (1)
@@ -35,9 +35,9 @@ AnimationClip:
     curve:
     - time: 0
       value: {fileID: 2100000, guid: 8f8c7600f9b90cc4680c61365dd9e9c8, type: 2}
-    - time: 0.33333334
+    - time: 0.28333333
       value: {fileID: 2100000, guid: 3054b58ed14f31445bf9e9e7346513df, type: 2}
-    - time: 0.6666667
+    - time: 0.53333336
       value: {fileID: 2100000, guid: 8f8c7600f9b90cc4680c61365dd9e9c8, type: 2}
     attribute: m_Materials.Array.data[0]
     path: InteractableCube (6)/Cube (1)
@@ -48,9 +48,9 @@ AnimationClip:
     curve:
     - time: 0
       value: {fileID: 2100000, guid: 8f8c7600f9b90cc4680c61365dd9e9c8, type: 2}
-    - time: 1.6666666
+    - time: 1.35
       value: {fileID: 2100000, guid: 5bec0f9d64151a6478368be69f555dc0, type: 2}
-    - time: 2
+    - time: 1.6333333
       value: {fileID: 2100000, guid: 8f8c7600f9b90cc4680c61365dd9e9c8, type: 2}
     attribute: m_Materials.Array.data[0]
     path: InteractableCube (4)/Cube (1)
@@ -61,9 +61,9 @@ AnimationClip:
     curve:
     - time: 0
       value: {fileID: 2100000, guid: 8f8c7600f9b90cc4680c61365dd9e9c8, type: 2}
-    - time: 2.3333333
+    - time: 1.8833333
       value: {fileID: 2100000, guid: c0a91aadf45fa5540b114f0a965253de, type: 2}
-    - time: 2.6666667
+    - time: 2.1666667
       value: {fileID: 2100000, guid: 8f8c7600f9b90cc4680c61365dd9e9c8, type: 2}
     - time: 3.5
       value: {fileID: 2100000, guid: 8f8c7600f9b90cc4680c61365dd9e9c8, type: 2}

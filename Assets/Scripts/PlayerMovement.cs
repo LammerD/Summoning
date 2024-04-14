@@ -11,13 +11,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField][Range(0.0f, 0.5f)] float moveSmoothTime = 0.3f;
 
     [SerializeField] float gravity = -30f;
-    [SerializeField] Transform groundCheck;
-    [SerializeField] LayerMask ground;
-
-    [SerializeField] float jumpHeight = 6f;
 
     float velocityY;
-    bool isGrounded;
 
     float cameraCap;
     Vector2 currentMouseDelta;
@@ -62,8 +57,6 @@ public class PlayerMovement : MonoBehaviour
 
     void UpdateMove()
     {
-        isGrounded = Physics.CheckSphere(groundCheck.position, 0.2f, ground);
-
         var targetDir = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         targetDir.Normalize();
 
@@ -74,15 +67,5 @@ public class PlayerMovement : MonoBehaviour
         var velocity = (transform.forward * currentDir.y + transform.right * currentDir.x) * Speed + Vector3.up * velocityY;
 
         controller.Move(velocity * Time.deltaTime);
-
-        if (isGrounded && Input.GetButtonDown("Jump"))
-        {
-            velocityY = Mathf.Sqrt(jumpHeight * -2f * gravity);
-        }
-
-        if (isGrounded! && controller.velocity.y < -1f)
-        {
-            velocityY = -8f;
-        }
     }
 }

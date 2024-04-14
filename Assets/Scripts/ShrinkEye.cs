@@ -17,7 +17,7 @@ public class ShrinkEye : MonoBehaviour
     {
         if (GameManager.Instance.BeatEndlessCorridor)
         {
-            enabled = false;
+            gameObject.SetActive(false);
         }
         if (GameManager.Instance.InEndlessCorridor && GameManager.Instance.IsLookingAtTarget && canResetSize)
         {
