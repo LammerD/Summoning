@@ -1,6 +1,4 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class AudioManager : MonoBehaviour
@@ -14,6 +12,7 @@ public class AudioManager : MonoBehaviour
     {
         StartCoroutine(FadeOut(GlobalAudio, GameManager.Instance.GameOverTime));
     }
+
     public IEnumerator FadeOut(AudioSource audioSource, float fadeTime)
     {
         var startVolume = audioSource.volume;

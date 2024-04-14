@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class KillTriggerWind : MonoBehaviour
 {
-    [SerializeField] private CandleLifeTime Candle;
+    [SerializeField] CandleLifeTime Candle;
 
     private void OnTriggerEnter(Collider other)
     {

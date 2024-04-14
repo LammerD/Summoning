@@ -14,15 +14,27 @@ public class GameManager : MonoBehaviour
     public UnityEvent GameOver;
     public UnityEvent WindShieldGet;
     public UnityEvent AllSymbolsRight;
+
+    public UnityEvent StartCorridor;
+    public UnityEvent EndCorridor;
+
     public static GameManager Instance { get; private set; }
     public float GameOverTime;
 
     public bool HasWindshield;
     public bool IsGameOver;
+    public bool DisabledPlayerMovement;
 
     List<int> lastButtons = new();
     int rightSymbolsDrawn;
     int wrongSymbolsDrawn;
+
+    public bool InEndlessCorridor;
+    public bool IsLookingAtTarget;
+    public bool BeatEndlessCorridor;
+
+    public bool BeatEyeObstacle;
+    public bool InEyeObstacle;
 
     private void Awake()
     {
@@ -90,9 +102,51 @@ public class GameManager : MonoBehaviour
     IEnumerator DelayBeforeGameOver()
     {
         IsGameOver = true;
+        DisabledPlayerMovement = true;
         yield return new WaitForSeconds(5);
         GameOver.Invoke();
         yield return new WaitForSeconds(10);
         SceneManager.LoadScene(0);
+    }
+
+    public void StartEndlessCorridor()
+    {
+        InEndlessCorridor = true;
+        DisabledPlayerMovement = true;
+    }
+
+    public void StopEndlessCorridor()
+    {
+        DisabledPlayerMovement = false;
+        InEndlessCorridor = false;
+    }
+
+    public void WonEndlessCorridor()
+    {
+        DisabledPlayerMovement = false;
+        InEndlessCorridor = false;
+        BeatEndlessCorridor = true;
+    }
+
+    public void LookAtTarget(bool isLooking)
+    {
+        DisabledPlayerMovement = !isLooking;
+        IsLookingAtTarget = isLooking;
+    }
+
+    public void StartEyeObstacle()
+    {
+        InEyeObstacle = true;
+    }
+
+    public void StopEyeObstacle()
+    {
+        InEyeObstacle = false;
+    }
+
+    public void WonEyeObstacle()
+    {
+        BeatEyeObstacle = true;
+        InEyeObstacle = false;
     }
 }

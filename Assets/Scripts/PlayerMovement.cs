@@ -41,7 +41,7 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         UpdateMouse();
-        if (GameManager.Instance.IsGameOver) return;
+        if (GameManager.Instance.DisabledPlayerMovement) return;
         UpdateMove();
     }
 
