@@ -11267,8 +11267,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Exit
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 9706e215aa79286449f8f41d1e667a3a, type: 2}
-  m_sharedMaterial: {fileID: -4479863385897977883, guid: 9706e215aa79286449f8f41d1e667a3a,
+  m_fontAsset: {fileID: 11400000, guid: b3854e79fcbfd4e4c812679465b195b5, type: 2}
+  m_sharedMaterial: {fileID: -4479863385897977883, guid: b3854e79fcbfd4e4c812679465b195b5,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -14640,8 +14640,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "You banished \nthe Red Prince! \nMay you always have a light in the darkness."
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 9706e215aa79286449f8f41d1e667a3a, type: 2}
-  m_sharedMaterial: {fileID: -4479863385897977883, guid: 9706e215aa79286449f8f41d1e667a3a,
+  m_fontAsset: {fileID: 11400000, guid: b3854e79fcbfd4e4c812679465b195b5, type: 2}
+  m_sharedMaterial: {fileID: -4479863385897977883, guid: b3854e79fcbfd4e4c812679465b195b5,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
