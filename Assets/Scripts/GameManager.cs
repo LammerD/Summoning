@@ -48,6 +48,7 @@ public class GameManager : MonoBehaviour
         {
             Instance = this;
         }
+        StartCoroutine(FadeIn());
     }
 
     public void SetGameOver()
@@ -97,7 +98,6 @@ public class GameManager : MonoBehaviour
 
         if (rightSymbolsDrawn == AmountOfRequiredSymbols && wrongSymbolsDrawn == 0)
         {
-            AllSymbolsRight.Invoke();
             CircleAnimator.SetTrigger("Win");
         }
     }
@@ -106,6 +106,7 @@ public class GameManager : MonoBehaviour
     {
         DisabledPlayerMovement = true;
         IsGameOver = true;
+        AllSymbolsRight.Invoke();
         StartCoroutine(FadeOut());
     }
 
@@ -119,16 +120,41 @@ public class GameManager : MonoBehaviour
             yield return new WaitForSeconds(0.01f);
         }
         WinText.SetActive(true);
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
+
+    IEnumerator FadeOutAfterLoss()
+    {
+        while (FadeImage.color.a < 1)
+        {
+            var tempColor = FadeImage.color;
+            tempColor.a += 0.01f;
+            FadeImage.color = tempColor;
+            yield return new WaitForSeconds(0.01f);
+        }
+    }
+
+    IEnumerator FadeIn()
+    {
+        while (FadeImage.color.a > 0)
+        {
+            var tempColor = FadeImage.color;
+            tempColor.a -= 0.008f;
+            FadeImage.color = tempColor;
+            yield return new WaitForSeconds(0.01f);
+        }
     }
 
     IEnumerator DelayBeforeGameOver()
     {
         IsGameOver = true;
         DisabledPlayerMovement = true;
-        yield return new WaitForSeconds(5);
         GameOver.Invoke();
-        yield return new WaitForSeconds(10);
-        SceneManager.LoadScene(0);
+        yield return new WaitForSeconds(5);
+        StartCoroutine(FadeOutAfterLoss());
+        yield return new WaitForSeconds(2);
+        SceneManager.LoadScene("MainGame");
     }
 
     public void StartEndlessCorridor()
